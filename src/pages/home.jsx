@@ -59,9 +59,9 @@ const Home = () => {
     lastName: "",
     phone: "",
     email: "",
-    categories: "Cocktail",
+    categories: "Ordinary Drink",
     typeOfDrinks: "Alcoholic",
-    glasses: "Cocktail glass",
+    glasses: "Highball glass",
     ingredients: [],
   });
   const [error, setError] = useState({
@@ -129,7 +129,7 @@ const Home = () => {
             icon: "error",
           });
         });
-    if (stepTwo) {
+    if (!stepTwo) {
       axios
         .get("https://www.thecocktaildb.com/api/json/v1/1/list.php?g=list")
         .then((res) => {
@@ -167,7 +167,7 @@ const Home = () => {
           });
         });
     }
-  }, [stepOne,stepTwo,stepThree,showProducts]);
+  }, [stepOne, stepTwo, stepThree, showProducts]);
 
   const handleSendData = (e) => {
     e.preventDefault();
@@ -259,12 +259,20 @@ const Home = () => {
       setError({ ...error, phone: "Invalid phone number" });
       setValuePhoneNumber(event);
       setVisibilityPhone("visible");
+      setData({
+        ...data,
+        phone: "",
+      });
     }
   };
   const handleChangeEmail = (event) => {
     if (!isValidEmail(event.target.value)) {
       setError({ ...error, email: "Email is invalid" });
       setVisibilityEmail("visible");
+      setData({
+        ...data,
+        email: "",
+      });
     } else {
       setData({
         ...data,
@@ -282,12 +290,42 @@ const Home = () => {
     setStepTwo(false);
     setStepThree(true);
   };
-  const handlecomfirmData = () => {
-    if (data.ingredients.length != 0) {
+  const handlecomfirmData = (e) => {
+    e.preventDefault();
+    if (
+      array&&array.length != 0 &&
+      data.barName !== "" &&
+      data.firstName !== "" &&
+      data.lastName !== "" &&
+      data.phone !== "" &&
+      data.email !== ""
+    ) {
       setShowProducts(true);
-    } else {
+    }
+
+    if (!array||array.length===0) {
       setVisibilityIngredients("visible");
       setError({ ...error, ingredients: "Please select ingredients" });
+    }
+    if (data.barName == "") {
+      setVisibilityBarName("visible");
+      setError({ ...error, barName: "The field is required" });
+    }
+    if (data.firstName == "") {
+      setVisibilityFirstName("visible");
+      setError({ ...error, firstName: "The field is required" });
+    }
+    if (data.lastName == "") {
+      setVisibilitylastName("visible");
+      setError({ ...error, lastName: "The field is required" });
+    }
+    if (data.phone == "") {
+      setVisibilityPhone("visible");
+      setError({ ...error, phone: "The field is required" });
+    }
+    if (data.email == "") {
+      setVisibilityEmail("visible");
+      setError({ ...error, email: "The field is required" });
     }
   };
 
