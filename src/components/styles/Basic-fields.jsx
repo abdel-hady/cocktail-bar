@@ -5,6 +5,13 @@ export const HomeStyle = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=Cookie&family=Qwitcher+Grypen:wght@400;700&family=Roboto:wght@100;300;400;500;700;900&family=Yellowtail&display=swap");
   width: 100%;
   color: #1e1e1e;
+  .page{
+    min-height: 100vh;
+    display: grid;
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+  }
+
   .logo {
     min-height: 10vh;
     display: flex;
@@ -267,7 +274,6 @@ export const HomeStyle = styled.div`
 
   .footer {
     width: 100%;
-    min-height: 10vh;
     min-height: 50px;
     padding: 25px 15px 15px 15px;
     margin-top: 50px;
@@ -499,4 +505,3 @@ export const ErrorIngredients = styled.span((props) => ({
   visibility: props.visibility,
   marginTop: "5px",
 }));
-

@@ -293,7 +293,8 @@ const Home = () => {
   const handlecomfirmData = (e) => {
     e.preventDefault();
     if (
-      array&&array.length != 0 &&
+      array &&
+      array.length != 0 &&
       data.barName !== "" &&
       data.firstName !== "" &&
       data.lastName !== "" &&
@@ -303,7 +304,7 @@ const Home = () => {
       setShowProducts(true);
     }
 
-    if (!array||array.length===0) {
+    if (!array || array.length === 0) {
       setVisibilityIngredients("visible");
       setError({ ...error, ingredients: "Please select ingredients" });
     }
@@ -339,7 +340,7 @@ const Home = () => {
       <GlobalStyles />
       <HomeStyle>
         <div className="bg-defualt"></div>
-        <div>
+        <div className="page">
           <div className="logo">
             <div className="logo-bar-name">
               <img className="logo-chef" src={Logo} alt="logo-chef" />
